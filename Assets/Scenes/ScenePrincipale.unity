@@ -4019,6 +4019,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 439240, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
   m_PrefabInstance: {fileID: 651874743}
   m_PrefabAsset: {fileID: 0}
+--- !u!108 &663613742 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 4935001023099943975, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+  m_PrefabInstance: {fileID: 4935001023781353088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &669192553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494348, guid: db49253e161c21440b7ccf6d59865098, type: 3}
@@ -5229,6 +5234,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 445452, guid: 14f2f01264616214ba79f88c8f46c15f, type: 3}
   m_PrefabInstance: {fileID: 1849594315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &866766605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 451345987270574041, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+  m_PrefabInstance: {fileID: 4935001023781353088}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &886887750
 PrefabInstance:
@@ -8246,7 +8256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728589158}
   m_Layer: 0
-  m_Name: TroupeauRoomba
+  m_Name: GroupeRoomba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11081,6 +11091,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1152402976628289209, guid: b4bfb325ed03ac34eb228a7d144901c7, type: 3}
+      propertyPath: sensibiliteSouris
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1424326944687764098, guid: b4bfb325ed03ac34eb228a7d144901c7, type: 3}
       propertyPath: m_Name
       value: Carl
@@ -11094,17 +11108,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1211401263}
     m_Modifications:
-    - target: {fileID: 4935001023109945349, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4935001023110131645, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
       propertyPath: m_Name
       value: Projecteur
-      objectReference: {fileID: 0}
-    - target: {fileID: 4935001023110162205, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4935001023110432277, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
       propertyPath: m_RootOrder
@@ -11150,6 +11156,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: lumiere
+      value: 
+      objectReference: {fileID: 663613742}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: etatsProjecteur.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: parentComposantsProjecteur
+      value: 
+      objectReference: {fileID: 866766605}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: etatsProjecteur.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8cb965c3fae717546a3918c88de8b25f, type: 2}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: etatsProjecteur.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a790ae04ceb3ca47be540f4c5ac5a31, type: 2}
+    - target: {fileID: 4935001023781353094, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
+      propertyPath: etatsProjecteur.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: a5a6fc4de0985bc4389d7512123eaa04, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
 --- !u!1001 &7699748078858511611

@@ -14,27 +14,53 @@ public class Roomba : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        limitesPiece = new Bounds(piece.transform.position, Vector3.zero);
 
-        foreach(MeshRenderer rendererEnfant in piece.transform.GetComponentsInChildren<MeshRenderer>())
+        if (piece != null)
         {
-            limitesPiece.Encapsulate(rendererEnfant.bounds);
+            limitesPiece = new Bounds(piece.transform.position, Vector3.zero);
+
+            foreach (MeshRenderer rendererEnfant in piece.transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                limitesPiece.Encapsulate(rendererEnfant.bounds);
+            }
+
+            StartCoroutine("GenererProchaineDestinationCoroutine");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (agent.velocity.sqrMagnitude < 0.001f && piece != null)
+        {
+            StartCoroutine("GenererProchaineDestinationCoroutine");
+        }
     }
+
     private IEnumerator GenererProchaineDestinationCoroutine()
     {
-        yield return null;
+        bool destinationModifiee = false;
+
+        while (!destinationModifiee)
+        {
+            Vector3 prochaineDestination = GenererPositionAleatoire();
+            NavMesh.SamplePosition(prochaineDestination, out NavMeshHit detection, 0.2f, NavMesh.AllAreas);
+            if (detection.hit)
+            {
+                agent.SetDestination(prochaineDestination);
+                destinationModifiee = true;
+            }
+            yield return null;
+        }
     }
 
     private Vector3 GenererPositionAleatoire()
     {
-        return Vector3.zero;
+        return new Vector3(
+            limitesPiece.center.x + Random.Range(- limitesPiece.extents.x, limitesPiece.extents.x),
+            0f,
+            limitesPiece.center.z + Random.Range(-limitesPiece.extents.z, limitesPiece.extents.z)
+        );
     }
 
     // Dessine dans la scène

@@ -6,84 +6,67 @@ using UnityEngine.AI;
 public class Roomba : MonoBehaviour
 {
     public GameObject piece;
-    private Bounds limitesPiece;
 
+    private Bounds limitesPiece;
     private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        CalculerLimites();
 
-        /*if (!agent.isOnNavMesh)
-        {
-            NavMesh.SamplePosition(transform.position, out NavMeshHit pointPlusPres, 1f, NavMesh.AllAreas);
-            if (pointPlusPres.hit)
-            {
-                transform.position = pointPlusPres.position;
-            }
-            else
-            {
-                Debug.Log("Impossible de positionner la Roomba.");
-            }
-        }*/
-
-        StartCoroutine("CalculerProchaineDestinationCoroutine");
-    }
-
-    private void CalculerLimites()
-    {
-        // Construit les limites de la pièce
         if (piece != null)
         {
             limitesPiece = new Bounds(piece.transform.position, Vector3.zero);
-            foreach (Renderer rendererEnfant in piece.GetComponentsInChildren<MeshRenderer>())
+
+            foreach (MeshRenderer rendererEnfant in piece.transform.GetComponentsInChildren<MeshRenderer>())
             {
                 limitesPiece.Encapsulate(rendererEnfant.bounds);
             }
-        }
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (limitesPiece != null)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(limitesPiece.center, limitesPiece.size);
+            StartCoroutine("GenererProchaineDestinationCoroutine");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance < 0.1f)
+        if (agent.velocity.sqrMagnitude < 0.001f && piece != null)
         {
-            StartCoroutine("CalculerProchaineDestinationCoroutine");
+            StartCoroutine("GenererProchaineDestinationCoroutine");
         }
     }
 
-    private IEnumerator CalculerProchaineDestinationCoroutine()
+    private IEnumerator GenererProchaineDestinationCoroutine()
     {
-        Vector3 prochaineDestination;
-        bool destinationMiseAJour = false;
+        bool destinationModifiee = false;
 
-        do
+        while (!destinationModifiee)
         {
-            prochaineDestination = GenererDestination();
-            if(NavMesh.SamplePosition(prochaineDestination, out NavMeshHit collisionNavMesh, 0.5f, NavMesh.AllAreas))
+            Vector3 prochaineDestination = GenererPositionAleatoire();
+            NavMesh.SamplePosition(prochaineDestination, out NavMeshHit detection, 0.2f, NavMesh.AllAreas);
+            if (detection.hit)
             {
                 agent.SetDestination(prochaineDestination);
-                destinationMiseAJour = true;
+                destinationModifiee = true;
             }
-
             yield return null;
-        } while (!destinationMiseAJour);
+        }
     }
 
-    private Vector3 GenererDestination()
+    private Vector3 GenererPositionAleatoire()
     {
-        return new Vector3(limitesPiece.center.x + Random.Range(-limitesPiece.extents.x, limitesPiece.extents.x),
-            0f, limitesPiece.center.z + Random.Range(-limitesPiece.extents.z, limitesPiece.extents.z));
+        return new Vector3(
+            limitesPiece.center.x + Random.Range(- limitesPiece.extents.x, limitesPiece.extents.x),
+            0f,
+            limitesPiece.center.z + Random.Range(-limitesPiece.extents.z, limitesPiece.extents.z)
+        );
+    }
+
+    // Dessine dans la scène
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(limitesPiece.center, limitesPiece.size);
     }
 }

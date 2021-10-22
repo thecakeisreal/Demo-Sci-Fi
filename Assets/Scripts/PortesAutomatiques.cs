@@ -8,6 +8,13 @@ public class PortesAutomatiques : MonoBehaviour
     // Controleur d'animation de la porte
     private Animator animatorPorte;
 
+    // Clips sonores
+    public AudioClip audioOuverture;
+    public AudioClip audioFermeture;
+
+    // Composantes source
+    private AudioSource source;
+
     private void Start()
     {
         animatorPorte = transform.Find("Porte").GetComponent<Animator>();
@@ -15,6 +22,8 @@ public class PortesAutomatiques : MonoBehaviour
         {
             Debug.Log("L'enfant nommé Porte devrait avoir un composant Animator");
         }
+
+        source = GetComponent<AudioSource>();
     }
 
     // Le joueur approche la porte
@@ -23,6 +32,9 @@ public class PortesAutomatiques : MonoBehaviour
         if(other.tag == "Player")
         {
             animatorPorte.SetBool("character_nearby", true);
+            // Jouer son ouverture
+            source.clip = audioOuverture;
+            source.Play();
         }
     }
 
@@ -32,6 +44,9 @@ public class PortesAutomatiques : MonoBehaviour
         if (other.tag == "Player")
         {
             animatorPorte.SetBool("character_nearby", false);
+            // Son fermeture
+            source.clip = audioFermeture;
+            source.Play();
         }
     }
 }

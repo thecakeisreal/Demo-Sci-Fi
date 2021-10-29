@@ -3568,7 +3568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &582023037
 Transform:
   m_ObjectHideFlags: 0
@@ -11386,17 +11386,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1211401263}
     m_Modifications:
-    - target: {fileID: 4935001023109945349, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4935001023110131645, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
       propertyPath: m_Name
       value: Projecteur
-      objectReference: {fileID: 0}
-    - target: {fileID: 4935001023110162205, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4935001023110432277, guid: e57107078a1ef974681e62d06b4fede6, type: 3}
       propertyPath: m_RootOrder
